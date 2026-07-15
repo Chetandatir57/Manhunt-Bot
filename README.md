@@ -1,0 +1,2 @@
+# Manhunt-Bot
+For moderation 
