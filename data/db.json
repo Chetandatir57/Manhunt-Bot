@@ -1,0 +1,55 @@
+{
+  "players": {
+    "932510577606156319": {
+      "username": "darkvision__chetan",
+      "wins": 0,
+      "losses": 0,
+      "matchesPlayed": 0
+    },
+    "1524521553021243542": {
+      "username": "1524521553021243542",
+      "wins": 0,
+      "losses": 0,
+      "matchesPlayed": 0
+    },
+    "1468440836332327004": {
+      "username": "1468440836332327004",
+      "wins": 0,
+      "losses": 0,
+      "matchesPlayed": 0
+    }
+  },
+  "tournaments": {
+    "t_1784152815637": {
+      "name": "chetan",
+      "hunterCount": 2,
+      "status": "cancelled",
+      "pool": [
+        "932510577606156319"
+      ],
+      "rounds": [
+        {
+          "roundNumber": 1,
+          "matches": [
+            {
+              "matchId": "t_1784152815637-R1-M1",
+              "runner": "932510577606156319",
+              "hunters": [
+                "1524521553021243542",
+                "1468440836332327004"
+              ],
+              "status": "scheduled",
+              "winner": null,
+              "scheduledTime": null,
+              "remindAt": 1784154553800,
+              "reminded": false,
+              "voiceChannelId": "1498710080839880874"
+            }
+          ]
+        }
+      ],
+      "channelId": "1524540063348687008"
+    }
+  },
+  "activeTournamentId": null
+}
