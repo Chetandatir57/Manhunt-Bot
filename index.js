@@ -33,7 +33,9 @@ async function checkReminders(client) {
             try {
               const channel = await client.channels.fetch(t.channelId);
               const mentions = [m.runner, ...m.hunters].map(id => `<@${id}>`).join(' ');
-              await channel.send(`⏰ Reminder: match **${m.matchId}** starting now! 🏃 <@${m.runner}> vs 🏹 ${m.hunters.map(h => `<@${h}>`).join(', ')}\n${mentions}`);
+              const vcLine = m.voiceChannelId ? `\n🔊 VC: <#${m.voiceChannelId}>` : '';
+              await channel.send(`⏰ Reminder: match **${m.matchId}** starting now! 🏃 <@${m.runner}> vs 🏹 ${m.hunters.map(h => `<@${h}>`).join(', ')}${vcLine}\n${mentions}`);
+              console.log(`[Reminder sent] ${m.matchId}`);
             } catch (err) {
               console.error('Reminder send failed:', err.message);
             }
@@ -54,10 +56,16 @@ client.on('interactionCreate', async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
   const command = client.commands.get(interaction.commandName);
   if (!command) return;
+
+  const sub = interaction.options.getSubcommand(false);
+  const commandLabel = sub ? `/${interaction.commandName} ${sub}` : `/${interaction.commandName}`;
+  const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+  console.log(`[${timestamp}] ${interaction.user.username} ran ${commandLabel} in #${interaction.channel?.name || interaction.channelId}`);
+
   try {
     await command.execute(interaction);
   } catch (err) {
-    console.error(err);
+    console.error(`[${timestamp}] Error in ${commandLabel}:`, err);
     const reply = { content: '❌ Kuch error aa gaya command run karte waqt.', ephemeral: true };
     if (interaction.replied || interaction.deferred) await interaction.followUp(reply);
     else await interaction.reply(reply);
